@@ -1,3 +1,0 @@
-
-[done] 1. open() -> can't create buffer with the contents of the pointed file.
-
