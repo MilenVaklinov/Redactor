@@ -1,0 +1,22 @@
+http://arstechnica.com/information-technology/2009/03/experimental-process-per-tab-browser-created-with-qt-xembed/
+
+
+Google's open source Chrome web browser manages each tab in a separate process in order to improve the program's robustness and security. The potential benefits and technical challenges of this experimental approach have attracted the interest of software developers. Several recent proof-of-concept projects have emerged to demonstrate how similar effects can be achieved with various development toolkits.
+
+KDE developer Ivan ?uki? has published a screenshot of a simple process-per-tab demo that he made for Linux with the Qt framework. He used XEmbed, an X Window System protocol that allows the contents of any window to be embedded directly in the widget layout of another program. Qt provides simple wrapper APIs that make XEmbed easier to work with.
+
+For rendering the HTML, he used Qt's QWebView widget. In his proof-of-concept browser, each tab is a separate QWebView instance in an external process that is integrated in the host window via XEmbed. To control the individual tabs, he uses the D-Bus interprocess communication mechanism. He says that the idea was partially was inspired by Vladimir Kuznetsov's Embed Window plasmoid.
+
+?uki? intends to make the source code for his Chrome-like browser hack available after he has had an opportunity to clean it up. It's obviously not intended to be used as a fully functional browser, but it could serve as a useful example of how to implement similar multi-process capabilities in other Qt applications.
+
+Mesa Dynamics has implemented a similar (but more complete) Chrome-like proof-of-concept browser called Stainless for Mac OS X. Stainless takes the concept further with totally unique features like support for parallel sessions.
+
+==============================================================
+http://ivan.fomentgroup.org/blog/2009/03/29/instant-chrome/
+
+I was wondering how hard would it be to create a web-browser that is, like Google‘s Chrome, separated in different processes for different tabs. You know, the whole “security problems and crashing are restrained to single tab” thing.
+As it turned out, it is not all that difficult. Create the main window, start the WebKit (QWebView) in another program, then X-Embed the later in the former, and communicate via D-Bus. (I got the idea to do this from Embed Window plasmoid  )
+If the child crashes, only one tab is gone. If the main application crashes, tabs become independent windows.
+I’m not sure whether I’ll continue to work on this, but if I find the time, you could see a Rekonq-based (http://rekonq.sourceforge.net/) browser that is similar to Chrome someday.
+
+

@@ -1,0 +1,118 @@
+===========================================================
+Delete the whole line
+-----------------------------------------------------------
+
+       me->setFocus();
+        int pos;
+        QTextCursor tc= me->textCursor();
+        pos=tc.columnNumber();
+        tc.select(QTextCursor::LineUnderCursor);
+        QString str=tc.selectedText();
+        tc.removeSelectedText();
+ 
+        tc.movePosition(QTextCursor::NextBlock,QTextCursor::MoveAnchor);
+        tc.insertText(str);
+        tc.insertBlock();
+        tc.movePosition(QTextCursor::PreviousBlock,QTextCursor::MoveAnchor);
+        tc.movePosition(QTextCursor::StartOfLine,QTextCursor::MoveAnchor);
+        me->setTextCursor(tc);
+        return true;
+
+===================================================================
+Moving cursor
+-------------------------------------------------------------------
+
+QTextEdit *textEdit = centralWidget()->findChild<QTextEdit *>("textEdit");
+
+QTextCursor textCursor(textEdit->document());
+textCursor.select(QTextCursor::LineUnderCursor);
+
+textEdit->setAutoFillBackground(true);
+QPalette palette;
+palette.setColor(QPalette::Background,QColor(200,200,200));
+textEdit->setPalette(palette);
+
+========================================================================
+Move splitter up and down
+------------------------------------------------------------------------
+Take a look at http://doc.trolltech.com/4.6/qsplitter.html#setSizes. 
+The main point is that there is no method to move the splitter explicity, you can only achieve similar behaviour by resizing the widgets in the QSplitter themselves, which is easily accomplished by using QSplitter::setSizes. 
+I would do something like
+
+QList<int> currentSizes = mySplitter->sizes();
+// adjust sizes individually here, e.g.
+currentSizes[0]++;
+currentSizes[1]--;
+mySplitter->setSizes(currentSizes);
+
+which would move a horizontal splitter with two widgets 
+by one pixel. You would have to add a check to avoid negative sizes, of course.
+
+==========================================================================
+Save buffer befero deleting
+--------------------------------------------------------------------------
+
+void MainWindow::save_buffer_before_killing_it(TextEditor * /*editor*/)
+{
+    if(editor) {
+
+        do {
+            clear_minibuffer_mode();
+            mode_minibuffer->setText("Buffer " + editor->currentFile() + " is modified: save it first? (yes or no)");
+            mode_minibuffer->setStyleSheet("color: blue;");
+            minibuffer->setReadOnly(false);
+            minibuffer->setFocus();
+
+            {
+                QEventLoop loop;
+                loop.connect(minibuffer, SIGNAL(returnPressed()), &loop, SLOT(quit()));
+                loop.exec();
+            }
+        } while((exit_choice() != "yes") && (exit_choice() != "no"));
+
+        if (exit_choice() == "no") {
+            update_minibuffer();
+            return;
+        } else {
+
+            do {
+                clear_minibuffer_mode();
+                mode_minibuffer->setText("Save it under this name? (yes or no)");
+                mode_minibuffer->setStyleSheet("color: blue;");
+                minibuffer->setReadOnly(false);
+                minibuffer->setFocus();
+
+                {
+                    QEventLoop loop;
+                    loop.connect(minibuffer, SIGNAL(returnPressed()), &loop, SLOT(quit()));
+                    loop.exec();
+                }
+            } while((exit_choice() != "yes") && (exit_choice() != "no"));
+
+            if (exit_choice() == "no") {
+                set_write_file_mode();
+                return;
+            } else {
+                QString errorMsg;
+                QFileInfo fi(editor->currentFilePath());
+
+                if(fi.isDir())
+                    errorMsg = editor->saveFileNonGui(editor->currentFilePath() + "/" + editor->currentFile());
+                else
+                    errorMsg = editor->saveFileNonGui(editor->currentFilePath());
+
+                if(!errorMsg.isEmpty())
+                {
+                    mode_minibuffer->setText(errorMsg);
+                    mode_minibuffer->setStyleSheet("color: red;");
+                    return;
+                }
+
+                QString saveModeText = "Wrote " + editor->currentFilePath();
+                mode_minibuffer->setStyleSheet("color: black;");
+                mode_minibuffer->setText(saveModeText);
+            }
+        }
+    }
+}
+

@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rev="made" href="mailto:webmasters@gnu.org">
+<link rel="icon" type="image/png" href="/graphics/gnu-head-mini.png">
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="ICBM" content="42.256233,-71.006581">
+<meta name="DC.title" content="gnu.org">
+
+<title>sQuezzle Manual</title>
+
+<style type="text/css">
+<!--
+@import url("style.css");
+-->
+</style>
+
+<!--
+This is the Sixteenth edition of the `GNU Emacs Manual',
+
+updated for Emacs version 23.3.
+
+Copyright (C) 1985, 1986, 1987, 1993, 1994, 1995, 1996, 1997,
+1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+2010, 2011  Free Software Foundation, Inc.
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.3 or any later version published by the Free Software
+     Foundation; with the Invariant Sections being "The GNU Manifesto,"
+     "Distribution" and "GNU GENERAL PUBLIC LICENSE," with the
+     Front-Cover texts being "A GNU Manual," and with the Back-Cover
+     Texts as in (a) below.  A copy of the license is included in the
+     section entitled "GNU Free Documentation License."
+
+     (a) The FSF's Back-Cover Text is: "You have the freedom to copy and
+     modify this GNU manual.  Buying copies from the FSF supports it in
+     developing GNU and promoting software freedom."
+   -->
+</head>
+<body>
+
+<p><b>The sQuezzle Editor</b></p>
+<p> sQuezzle started as a university project. My intention was to implement some basic feachers
+<br> of Gnu Emacs using only C++ and Qt. For this reason almost everything looks and feels like the Emacs editor. 
+<p> sQuezzle uses a modified version of the GNU Emacs' documentation.
+<p>Emacs is the extensible, customizable, self-documenting real-time
+display editor.
+<br>The homepage for GNU Emacs is at
+<a href="http://www.gnu.org/software/emacs/">http://www.gnu.org/software/emacs/</a>.<br>
+Join the society for free software advocates on <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/index.html">Free Software Foundation</a>.
+
+<br>
+
+<table id="one-column-emphasis">
+
+	<tr>
+        	<th colspan="2">sQuezzle Documentation</th>
+        </tr>
+
+    	<tr>
+	<td><a accesskey="1" href="Distrib.html#Distrib">Distrib</a></td>
+        <td>How to get the latest Emacs distribution.</td>
+  	</tr>
+
+    <tr>
+    <td><a accesskey="2" href="Intro.html#Intro">Intro</a></td>
+    <td>An introduction to Emacs concepts. 
+<!-- Note that in the printed manual, the glossary and indices come last. --></td>
+  </tr>
+  
+    <tr>
+    <td><a accesskey="3" href="Glossary.html#Glossary">Glossary</a></td>
+    <td>Terms used in this manual.</td>
+    </tr>  
+
+   <tr>
+    <td>Indexes
+  </td></tr>
+  <tr>
+    <td><a accesskey="4" href="Key-Index.html#Key-Index">Key Index</a></td>
+    <td>An item for each standard Emacs key sequence.</td>
+  </tr>
+  <tr>
+    <td><a accesskey="5" href="Option-Index.html#Option-Index">Option Index</a></td>
+    <td>An item for every command-line option.</td>
+  </tr>
+  <tr>
+    <td><a accesskey="6" href="Command-Index.html#Command-Index">Command Index</a></td>
+    <td>An item for each command name.</td>
+  </tr>
+  <tr>
+    <td><a accesskey="7" href="Variable-Index.html#Variable-Index">Variable Index</a></td>
+    <td>An item for each documented variable.</td>
+  </tr>
+  <tr>
+    <td><a accesskey="8" href="Concept-Index.html#Concept-Index">Concept Index</a></td>
+    <td>An item for each concept.</td>
+  </tr>
+  <tr>
+    <td><a accesskey="9" href="Acknowledgments.html#Acknowledgments">Acknowledgments</a></td>
+    <td>Major contributors to GNU Emacs.
+  </td></tr>  
+
+
+  
+  <tr>
+    <th colspan="2" align="left" style="text-align:left">General Concepts</th>
+  </tr>
+  
+  <tr>
+    <td><a href="Screen.html#Screen">Screen</a></td>
+    <td>How to interpret what you see on the screen.</td>
+  </tr>
+  <tr>
+    <td><a href="User-Input.html#User-Input">User Input</a></td>
+    <td>Kinds of input events (characters, buttons,
+                          function keys).</td>
+  </tr>
+  <tr>
+    <td><a href="Keys.html#Keys">Keys</a></td>
+    <td>Key sequences: what you type to request one
+                          editing action.</td>
+  </tr>
+  <tr>
+    <td><a href="Commands.html#Commands">Commands</a></td>
+    <td>Named functions run by key sequences to do editing.</td>
+  </tr>
+  <tr>
+    <td><a href="Entering-Emacs.html#Entering-Emacs">Entering Emacs</a></td>
+    <td>Starting Emacs from the shell.</td>
+  </tr>
+  <tr>
+    <td><a href="Exiting.html#Exiting">Exiting</a></td>
+    <td>Stopping or killing Emacs.
+  </td></tr>  
+
+
+  <tr>
+    <th colspan="2" align="left" style="text-align:left">Fundamental Editing Commands
+  </th></tr>
+  <tr>
+    <td><a href="Basic.html#Basic">Basic</a></td>
+    <td>The most basic editing commands.</td>
+  </tr>
+  <tr>
+    <td><a href="Minibuffer.html#Minibuffer">Minibuffer</a></td>
+    <td>Entering arguments that are prompted for.</td>
+  </tr>
+  <tr>
+    <td><a href="M_002dx.html#M_002dx">M-x</a></td>
+    <td>Invoking commands by their names.</td>
+  </tr>
+  <tr>
+    <td><a href="Help.html#Help">Help</a></td>
+    <td>Commands for asking Emacs about its commands.
+
+  </td></tr>  
+
+   <tr>
+    <th colspan="2" align="left" style="text-align:left">Important Text-Changing Commands
+  </th></tr>
+  <tr>
+    <td><a href="Mark.html#Mark">Mark</a></td>
+    <td>The mark: how to delimit a ``region'' of text.</td>
+  </tr>
+  <tr>
+    <td><a href="Killing.html#Killing">Killing</a></td>
+    <td>Killing (cutting) text.</td>
+  </tr>
+  <tr>
+    <td><a href="Yanking.html#Yanking">Yanking</a></td>
+    <td>Recovering killed text.  Moving text. (Pasting.)</td>
+  </tr>
+  <tr>
+    <td><a href="Accumulating-Text.html#Accumulating-Text">Accumulating Text</a></td>
+    <td>Other ways of copying text.</td>
+  </tr>
+  <tr>
+    <td><a href="Rectangles.html#Rectangles">Rectangles</a></td>
+    <td>Operating on the text inside a rectangle on the screen.</td>
+  </tr>
+  <tr>
+    <td><a href="CUA-Bindings.html#CUA-Bindings">CUA Bindings</a></td>
+    <td>Using <kbd>C-x</kbd>, <kbd>C-c</kbd>, <kbd>C-v</kbd> for copy
+                          and paste, with enhanced rectangle support.</td>
+  </tr>
+  <tr>
+    <td><a href="Registers.html#Registers">Registers</a></td>
+    <td>Saving a text string or a location in the buffer.</td>
+  </tr>
+  <tr>
+    <td><a href="Display.html#Display">Display</a></td>
+    <td>Controlling what text is displayed.</td>
+  </tr>
+  <tr>
+    <td><a href="Search.html#Search">Search</a></td>
+    <td>Finding or replacing occurrences of a string.</td>
+  </tr>
+  <tr>
+    <td><a href="Fixit.html#Fixit">Fixit</a></td>
+    <td>Commands especially useful for fixing typos.</td>
+  </tr>
+  <tr>
+    <td><a href="Keyboard-Macros.html#Keyboard-Macros">Keyboard Macros</a></td>
+    <td>A keyboard macro records a sequence of
+                          keystrokes to be replayed with a single command.
+
+  </td></tr>  
+
+  <tr>
+    <th colspan="2" align="left" style="text-align:left">Major Structures of Emacs
+  </th></tr>
+  <tr>
+    <td><a href="Files.html#Files">Files</a></td>
+    <td>All about handling files.</td>
+  </tr>
+  <tr>
+    <td><a href="Buffers.html#Buffers">Buffers</a></td>
+    <td>Multiple buffers; editing several files at once.</td>
+  </tr>
+  <tr>
+    <td><a href="Windows.html#Windows">Windows</a></td>
+    <td>Viewing two pieces of text at once.</td>
+  </tr>
+  <tr>
+    <td><a href="International.html#International">International</a></td>
+    <td>Using non-<acronym>ASCII</acronym> character sets.
+
+  </td></tr>  
+
+<tr>
+    <th colspan="2" align="left" style="text-align:left">Advanced Features
+  </th></tr>
+  <tr>
+    <td><a href="Major-Modes.html#Major-Modes">Major Modes</a></td>
+    <td>Text mode vs. Lisp mode vs. C mode...</td>
+  </tr>
+  <tr>
+    <td><a href="Indentation.html#Indentation">Indentation</a></td>
+    <td>Editing the white space at the beginnings of lines.</td>
+  </tr>
+  <tr>
+    <td><a href="Text.html#Text">Text</a></td>
+    <td>Commands and modes for editing English.</td>
+  </tr>
+  <tr>
+    <td><a href="Programs.html#Programs">Programs</a></td>
+    <td>Commands and modes for editing programs.</td>
+  </tr>
+  <tr>
+    <td><a href="Building.html#Building">Building</a></td>
+    <td>Compiling, running and debugging programs.</td>
+  </tr>
+
+  <tr>
+    <td><a href="Amusements.html#Amusements">Amusements</a></td>
+    <td>Various games and hacks.</td>
+  </tr>
+  <tr>
+    <td><a href="Customization.html#Customization">Customization</a></td>
+    <td>Modifying the behavior of Emacs.
+
+  </td></tr> 
+  
+<tr>
+    <td><a href="Quitting.html#Quitting">Quitting</a></td>
+    <td>Quitting and aborting.</td>
+  </tr>
+  <tr>
+    <td><a href="Lossage.html#Lossage">Lossage</a></td>
+    <td>What to do if Emacs is hung or malfunctioning.</td>
+  </tr>
+  <tr>
+    <td><a href="Bugs.html#Bugs">Bugs</a></td>
+    <td>How and when to report a bug.</td>
+  </tr>
+  <tr>
+    <td><a href="Contributing.html#Contributing">Contributing</a></td>
+    <td>How to contribute improvements to Emacs.</td>
+  </tr>
+  <tr>
+    <td><a href="Service.html#Service">Service</a></td>
+    <td>How to get help for your own Emacs needs.
+
+  </td></tr>  
+
+  <tr>
+    <th colspan="2" align="left" style="text-align:left" background="#d0dafd">Appendices
+  </th></tr>
+  <tr>
+    <td><a href="Copying.html#Copying">Copying</a></td>
+    <td>The GNU General Public License gives you permission
+                          to redistribute GNU Emacs on certain terms;
+                          it also explains that there is no warranty.</td>
+  </tr>
+  <tr>
+    <td><a href="GNU-Free-Documentation-License.html#GNU-Free-Documentation-License">GNU Free Documentation License</a></td>
+    <td>The license for this documentation.</td>
+  </tr>
+  <tr>
+    <td><a href="Emacs-Invocation.html#Emacs-Invocation">Emacs Invocation</a></td>
+    <td>Hairy startup options.</td>
+  </tr>
+  <tr>
+    <td><a href="X-Resources.html#X-Resources">X Resources</a></td>
+    <td>X resources for customizing Emacs.</td>
+  </tr>
+  <tr>
+    <td><a href="Manifesto.html#Manifesto">Manifesto</a></td>
+    <td>What's GNU?  Gnu's Not Unix!
+<!-- Do NOT modify the following 3 lines!  They must have this form to -->
+<!-- be correctly identified by `texinfo-multiple-files-update'.  In -->
+<!-- particular, the detailed menu header line MUST be identical to the -->
+<!-- value of `texinfo-master-menu-header'.  See texnfo-upd.el. -->
+  </td></tr>
+
+</table>
+
+   <blockquote>
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being &ldquo;The GNU Manifesto,&rdquo; &ldquo;Distribution&rdquo; and
+&ldquo;GNU GENERAL PUBLIC LICENSE,&rdquo; with the Front-Cover texts being &ldquo;A GNU
+Manual,&rdquo; and with the Back-Cover Texts as in (a) below.  A copy of the
+license is included in the section entitled &ldquo;GNU Free Documentation
+License.&rdquo;
+
+   <p>(a) The FSF's Back-Cover Text is: &ldquo;You have the freedom to copy and
+modify this GNU manual.  Buying copies from the FSF supports it in
+developing GNU and promoting software freedom.&rdquo;
+</blockquote>
+
+   </body></html>
+

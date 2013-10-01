@@ -1,0 +1,17 @@
+===========================================================================
+Actions, which we should perform before using zix editor.
+---------------------------------------------------------------------------
+
+1. Install compizconfig-settings-manager on Ubuntu, so we can disable some shortcuts.
+
+2. Disable these shortcuts.
+
+Alt-Space .......... Go to Ubuntu -> Settings -> Keyboard
+    -> Shortcuts -> Windows -> "Activate the window menu" [Disable]
+
+Alt-` .......... Go to compizconfig -> Desktop
+    -> Ubuntu Unity Plugin -> Switcher -> "Key to flip through windows in the switcher" [Disable]
+
+Ctrl-Alt-S ......... Go to Ubunty -> Settings -> Keyboard
+    -> Shortcuts -> Windows -> "Toggle shaded state"  and "Toggle maximization state"[Disable]
+

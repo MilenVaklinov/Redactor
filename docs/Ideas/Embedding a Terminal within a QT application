@@ -1,0 +1,45 @@
+http://stackoverflow.com/questions/305523/embedding-an-application-in-this-case-a-terminal-within-a-qt-application
+
+I am writing a QT application and I need to embed a terminal (we say,xterm) within a QDialog, like some KDE application (see kdevelop/kate/...).
+
+I've been trying with: - QX11EmbedContainer placed into the QLayout of my QDialog - QProcess for the program I want to excecute
+
+I expect the QProcess running within the QX11EmbedContainer, but it does not work.
+
+The problem is that I can't put the xterm into the QX11EmbedContainer, the only thing I obtain is an xterm window (unfortunately separated from my QDialog). Does anybody got the same problem?
+
+
+You need to pass the window ID of the container to the xterm.
+
+If you look at the example in the Qt help for QX11EmbedContainer, it just passes the window id to the QProcess. Change this to
+
+ QProcess process(&container);
+ QString executable(app.arguments()[1]);
+ QStringList arguments;
+ arguments << "-into" << QString::number(container.winId());
+ process.start(executable, arguments);
+where "-into" has been added to the arguments. From the XTerm man page:
+
+-into windowId
+
+Given an X window identifier (a decimal integer), xterm will reparent its top-level shell widget to that window. This is used to embed xterm within other applications.
+
+
+Sorry, I've tried your solution before posting oh this site and it does not work. I've solved switching to kdelibs and using those imports and this code
+
+#include <kparts/part.h>
+#include <assert.h>
+#include <kde_terminal_interface.h>
+#include <kpluginfactory.h>
+#include <klibloader.h>
+KLibFactory* factory = KLibLoader::self()->factory( "libkonsolepart" );
+KParts::Part* p = static_cast<KParts::Part*>(factory->create( this,"tralala",         
+QStringList() << "dio") );
+
+assert(p);
+setCentralWidget( p->widget() );
+TerminalInterface *t = qobject_cast<TerminalInterface*>(p);
+t->showShellInDir( QDir::home().path() );
+
+
+

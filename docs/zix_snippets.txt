@@ -1,0 +1,158 @@
+
+
+============================================================
+This is a way to show lines, spaces and tabs separators?
+------------------------------------------------------------
+
+    QTextOption option = document()->defaultTextOption();
+    QTextOption::Flags flags = option.flags();
+    flags |= QTextOption::ShowLineAndParagraphSeparators | QTextOption::ShowTabsAndSpaces;
+    option.setFlags(flags);
+    document()->setDefaultTextOption(option);
+
+It's tested and works perfectly. What shoud I do in future is
+to use this snippet and make to commands:
+M-x show-line-separators
+M-x hide-line-separators
+
+But rightnow I do not have time.
+
+============================================================
+How can I simulate user interaction (key press event) in Qt?
+------------------------------------------------------------
+
+QKeyEvent *event = new QKeyEvent ( QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifiers);
+QCoreApplication::postEvent (receiver, event);
+
+============================================================
+Insert an Image to a QTextEdit
+------------------------------------------------------------
+
+void TextEdit::insertImage()
+{
+    QString file = QFileDialog::getOpenFileName(this, tr("Select an image"),
+                                  ".", tr("Bitmap Files (*.bmp)\n"
+                                    "JPEG (*.jpg *jpeg)\n"
+                                    "GIF (*.gif)\n"
+                                    "PNG (*.png)\n"));
+    QUrl Uri ( QString ( "file://%1" ).arg ( file ) );
+    QImage image = QImageReader ( file ).read();
+
+    QTextDocument * textDocument = m_textEdit->document();
+    textDocument->addResource( QTextDocument::ImageResource, Uri, QVariant ( image ) );
+    QTextCursor cursor = m_textEdit->textCursor();
+    QTextImageFormat imageFormat;
+    imageFormat.setWidth( image.width() );
+    imageFormat.setHeight( image.height() );
+    imageFormat.setName( Uri.toString() );
+    cursor.insertImage(imageFormat);
+ }
+
+The third way is to inherit QTextEdit and reimplement
+bool canInsertFromMimeData(const QMimeData source) const* and 
+void insertFromMimeData(const QMimeData source)* functions as followes. 
+Buy the way this method allows to use drag-and-drop or copy-paste mechanisms.
+
+class TextEdit : public QTextEdit
+{
+public:
+    bool canInsertFromMimeData(const QMimeData* source) const
+    {
+        return source->hasImage() || source->hasUrls() ||
+            QTextEdit::canInsertFromMimeData(source);
+    }
+
+    void insertFromMimeData(const QMimeData* source)
+    {
+        if (source->hasImage())
+        {
+            static int i = 1;
+            QUrl url(QString("dropped_image_%1").arg(i++));
+            dropImage(url, qvariant_cast<QImage>(source->imageData()));
+        }
+        else if (source->hasUrls())
+        {
+            foreach (QUrl url, source->urls())
+            {
+                QFileInfo info(url.toLocalFile());
+                if (QImageReader::supportedImageFormats().contains(info.suffix().toLower().toLatin1()))
+                    dropImage(url, QImage(info.filePath()));
+                else
+                    dropTextFile(url);
+            }
+        }
+        else
+        {
+            QTextEdit::insertFromMimeData(source);
+        }
+    }
+
+private:
+    void dropImage(const QUrl& url, const QImage& image)
+    {
+        if (!image.isNull())
+        {
+            document()->addResource(QTextDocument::ImageResource, url, image);
+            textCursor().insertImage(url.toString());
+        }
+    }
+
+    void dropTextFile(const QUrl& url)
+    {
+        QFile file(url.toLocalFile());
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+            textCursor().insertText(file.readAll());
+    }
+};
+
+===========================================================
+Delete the whole line
+-----------------------------------------------------------
+
+       me->setFocus();
+        int pos;
+        QTextCursor tc= me->textCursor();
+        pos=tc.columnNumber();
+        tc.select(QTextCursor::LineUnderCursor);
+        QString str=tc.selectedText();
+        tc.removeSelectedText();
+ 
+        tc.movePosition(QTextCursor::NextBlock,QTextCursor::MoveAnchor);
+        tc.insertText(str);
+        tc.insertBlock();
+        tc.movePosition(QTextCursor::PreviousBlock,QTextCursor::MoveAnchor);
+        tc.movePosition(QTextCursor::StartOfLine,QTextCursor::MoveAnchor);
+        me->setTextCursor(tc);
+        return true;
+
+===================================================================
+Moving cursor
+-------------------------------------------------------------------
+
+QTextEdit *textEdit = centralWidget()->findChild<QTextEdit *>("textEdit");
+
+QTextCursor textCursor(textEdit->document());
+textCursor.select(QTextCursor::LineUnderCursor);
+
+textEdit->setAutoFillBackground(true);
+QPalette palette;
+palette.setColor(QPalette::Background,QColor(200,200,200));
+textEdit->setPalette(palette);
+
+========================================================================
+Move splitter up and down
+------------------------------------------------------------------------
+Take a look at http://doc.trolltech.com/4.6/qsplitter.html#setSizes. 
+The main point is that there is no method to move the splitter explicity, you can only achieve similar behaviour by resizing the widgets in the QSplitter themselves, which is easily accomplished by using QSplitter::setSizes. 
+I would do something like
+
+QList<int> currentSizes = mySplitter->sizes();
+// adjust sizes individually here, e.g.
+currentSizes[0]++;
+currentSizes[1]--;
+mySplitter->setSizes(currentSizes);
+
+which would move a horizontal splitter with two widgets 
+by one pixel. You would have to add a check to avoid negative sizes, of course.
+
+

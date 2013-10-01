@@ -1,0 +1,11 @@
+#letterpress {
+	margin-top:200px;
+	text-align:center;
+}
+#letterpress h1 {
+	font-size:60px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #504f4f;
+	text-shadow: 0px 2px 1px #bbbaba;
+}
+

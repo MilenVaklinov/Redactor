@@ -1,0 +1,13 @@
+QPlainTextEdit {
+	selection-color: black;
+	selection-background-color: #EEDC82;
+}
+
+QToolBar#mode-line {
+	border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #737373;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #737373;
+}

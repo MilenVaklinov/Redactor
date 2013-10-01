@@ -1,0 +1,26 @@
+/* ------------------
+ styling for the table
+   ------------------   */
+
+#one-column-emphasis
+{
+	text-align: left;	
+}
+
+#one-column-emphasis th
+{
+	font-weight: bold;
+	padding: 12px 15px;
+	color: #039;
+	background-color: #d0dafd;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+}
+
+#one-column-emphasis td
+{
+	padding: 12px 15px;
+	border-top: 1px solid #e8edff;
+	color: #339;
+	background: #eff2ff;
+}

@@ -1,0 +1,5 @@
+h1 {
+  font: 70px Tahoma, Helvetica, Arial, Sans-Serif;
+  text-align: center;
+}
+

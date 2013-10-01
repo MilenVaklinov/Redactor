@@ -1,0 +1,25 @@
+1. Completer
+- ccscope, cctags
+
+2. Source Highlightening
+- C, C++, HTML, CSS, XML
+
+3. Auto indentation
+
+5. All from Mg
+
+6. Documentation
+
+8. dbg
+
+9. More programming tools
+
+10. PDF - Poppler
+
+11. Images
+
+12. Mail
+
+13. Mp3
+
+14. RSS news

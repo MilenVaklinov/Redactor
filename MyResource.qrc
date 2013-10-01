@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>icons/close.png</file>
+        <file>icons/contact.png</file>
+        <file>icons/copy.png</file>
+        <file>icons/cut.png</file>
+        <file>icons/exit.png</file>
+        <file>icons/font.png</file>
+        <file>icons/info.png</file>
+        <file>icons/new.png</file>
+        <file>icons/open.png</file>
+        <file>icons/paste.png</file>
+        <file>icons/print.png</file>
+        <file>icons/redo.png</file>
+        <file>icons/save.png</file>
+        <file>icons/saveAs.png</file>
+        <file>icons/undo.png</file>
+        <file>icons/steam.png</file>
+        <file>icons/terminal.png</file>
+    </qresource>
+    <qresource prefix="/css">
+        <file>style.qss</file>
+    </qresource>
+    <qresource prefix="/tuts">
+        <file>Documentation/terminal_shortcuts.txt</file>
+        <file>Documentation/unixtoolbox.txt</file>
+        <file>Documentation/zix_tutorial_bg</file>
+        <file>Documentation/zix_tutorial_en</file>
+    </qresource>
+</RCC>
