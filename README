@@ -1,5 +1,5 @@
 Redactor is a micro Emacs-like text editor that runs on Unix-like operating systems
-originally written by Milen Vaklinov. It is written in C++ using Qt Framework.
+originally written by Milen Vaklinov using C++ using Qt Framework.
 
 Redactor allows several files to be edited at the same time. The screen can be 
 split into different windows and screens, and text may be moved freely from one 
