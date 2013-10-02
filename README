@@ -1,12 +1,6 @@
-Redactor is a micro Emacs-like text editor that runs on Unix-like operating systems
-originally written by Milen Vaklinov. It is written in C++ using Qt Framework.
+Redactor is a micro Emacs text editor that runs on Unix-like operating systems originally written by Milen Vaklinov using C++ using Qt Framework.
 
-Redactor allows several files to be edited at the same time. The screen can be 
-split into different windows and screens, and text may be moved freely from one 
-window on any screen to the next. Depending on the type of file being edited, 
-Redactor can change how it behaves to make editing simple. Editing standard text 
-files, program files and word processing documents are all possible at the same time.
+Redactor allows several files to be edited at the same time. The screen can be split into different windows and screens, and text may be moved freely from one window on any screen to the next. Depending on the type of file being edited, 
+Redactor can change how it behaves to make editing simple. Editing standard text files, program files and word processing documents are all possible at the same time.
 
-There are extensive capabilities to make word processing and editing easier. 
-These include commands for string searching and replacing, paragraph reformatting and deleting,
-automatic word wrapping, word move and deletes, easy case controlling, and automatic word counts.
+There are extensive capabilities to make word processing and editing easier. These include commands for string searching and replacing, paragraph reformatting and deleting, automatic word wrapping, word move and deletes, easy case controlling, and automatic word counts.
